@@ -25,11 +25,9 @@ from tarjetas import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/',views.account, name = 'account'),
+    path('accounts/',views.account, name = 'accounts'),
     path('customers/',views.customers, name = 'customers'),
     path('login/',views.login, name = 'login'),
-    path('perfil/',views.perfil, name = 'perfil'),
-    path('perfil/',views.perfil, name = 'perfil'),
     path('prestamos/',views.prestamos, name = 'prestamos'),
-    path('tarjetas/',views.tarjetas, name = 'tarjetas'),
+    path('tarjetas/',views.tarjetas, name = 'tarjetas')
 ]
