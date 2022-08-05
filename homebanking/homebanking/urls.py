@@ -26,8 +26,8 @@ from tarjetas import views as tarjetas_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',ITBANK_views.home,name = 'home'),
-    path('Clientes/',Cliente_views.Clientes, name = 'Clientes'),
-    path('Cuentas/',Cuentas_views.Cuentas, name = 'Cuentas'),
+    path('clientes/',Cliente_views.Clientes, name = 'clientes'),
+    path('cuentas/',Cuentas_views.Cuentas, name = 'cuentas'),
     path('login/',login_views.login, name = 'login'),
     path('prestamos/',prestamos_views.prestamos, name = 'prestamos'),
     path('tarjetas/',tarjetas_views.tarjetas, name = 'tarjetas'),
