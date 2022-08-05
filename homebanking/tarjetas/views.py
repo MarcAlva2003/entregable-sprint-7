@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from .models import Project
 
 # Create your views here.
 
 def tarjetas(request):
-    
-    return render(request,'tarjetas.html')
+    projects = Project.objects.all()
+    return render(request,'tarjetas/tarjetas.html')

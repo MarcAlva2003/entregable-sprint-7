@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %} | ITBANK</title>
+
+        {%load static %}
+        <!-- aca se cargan los link css y fuentes -->
+        <link rel="stylesheet" href="{% static 'ITBANK/style/footter.css' %}" />
+
+    </head>
+    <body>
+
+        <footer class="conteiner footer">
+      
+          <div
+            class="d-flex flex-row section-container justify-content-between"
+            id="links">
+            <!-- <div class="col-1"></div> -->
+            <div class="links-column">
+              <h4>AYUDA</h4>
+              <ul>
+                <li class="links-column--link">
+                  <a href="https://campus.itba.edu.ar">Preguntas frecuentes</a>
+                </li>
+                <li class="links-column--link">
+                  <a href="mailto:ITBANK@gmail.com">Envienos un correo</a>
+                </li>
+                <li class="links-column--link">
+                  <a href="https://youtube.com.ar">Ver tutorial</a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- <div class="col-1"></div> -->
+            <div class="links-column">
+              <h4>SUCURSALES</h4>
+              <ul>
+                <li class="links-column--link">
+                  <a href="sucycajero.html">Nuestras sucursales</a>
+                </li>
+                <li class="links-column--link">
+                  <a href="sucycajero.html">Cajeros</a>
+                </li>
+                <li class="links-column--link">
+                  <a href="https://itba.edu.ar">Otros servicios</a>
+                </li>
+              </ul>
+            </div>
+            <!-- <div class="col-2"></div> -->
+            <div class="links-column">
+              <h4>REDES SOCIALES</h4>
+              <ul>
+                <li class="links-column--link">
+                  <a href="https://www.Instagram.com">Instagram</a>
+                </li>
+                <li class="links-column--link">
+                  <a href="https://www.Facebook.com">Facebook</a>
+                </li>
+                <li class="links-column--link">
+                  <a href="https://www.Twiter.com">Twiter</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="d-flex flex-row justify-content-between section-container"
+            id="fondo">
+            <!-- <div class="col-1"></div> -->
+            <div class="fondo-item">
+              <a class="text" href="terminos.html">Terminos y condiciones</a>
+            </div>
+
+            <!-- <div class="col-1"></div> -->
+            <div class="fondo-item">
+              <a class="text" href="https://www.paginaweb.com">Sobre nosotros</a>
+            </div>
+
+            <!-- <div class="col-2"></div> -->
+            <div class="fondo-item">
+              <a class="text" href="https://www.paginaweb.com">www.itbank.com</a>
+            </div>
+          </div>
+        </footer>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js' %}"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+
+    </body>
+</html>

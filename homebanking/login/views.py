@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from .models import Project
 
 # Create your views here.
 
 def login(request):
-    
-    return render(request,'login.html')
+    projects = Project.objects.all()
+    return render(request,'login/login.html')
