@@ -1,3 +1,90 @@
-{% extends 'ITBANK/base.html' %} 
-{% load static %} 
-{% block title %}Prestamos{% endblock %}
+{% extends 'ITBANK/base.html' %}
+<title>{% block title %}Prestamos{% endblock %}| ITBANK</title>
+{% load static %}
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="{% static 'ITBANK/style/globals.css' %}" />
+<link rel="stylesheet" href="{% static 'ITBANK/style/header.css' %}" />
+<link rel="stylesheet" href="{% static 'ITBANK/style/home.css' %}" />
+<link rel="stylesheet" href="{% static 'ITBANK/style/prestamos.css' %}" />
+<link rel="stylesheet" href="{% static 'ITBANK/style/footer.css' %}" />
+
+{% block content %}
+<!-- --------------------------------- -->
+<!-- --------------BODY--------------- -->
+<!-- --------------------------------- -->
+<main class="hero section-container">
+  <div class="hero-background section-background">
+    <div class="hero-text hero-item">
+      <h1>Conseguí eso que tanto deseas</h1>
+      <div class="hero-text-paragraph">
+        <p>Sacá el monto y tiempo de devolución que mejor se adapte a vos.</p>
+        <p>Que el dinero no sea un problema.</p>
+      </div>
+      <button class="hero-text-button">Quiero un préstamo</button>
+    </div>
+    <div class="hero-image hero-item"></div>
+  </div>
+</main>
+
+<!-- PRESTAMOS -->
+<div class="loans section-container">
+  <div class="loans-background section-background">
+    <h2>Mis préstamos</h2>
+    <div class="loans-list">
+      <p>Aún no tiene ningún prestamo</p>
+    </div>
+  </div>
+</div>
+
+<!-- NUEVO PRESTAMO -->
+<div class="new-loan section-container">
+  <div class="new-loan-background section-background">
+    <div class="new-loan-heading">
+      <h2>Pedir un préstamo</h2>
+      <p>Completá el formulario para solicitar un nuevo préstamo</p>
+    </div>
+    <div class="new-loan-form">
+      <div class="input-money-amount new-loan-form--item">
+        <label for="money">Cantidad de dinero (pesos):</label>
+        <input
+          id="input-number"
+          class="input-number money-input"
+          placeholder="ARS"
+          id="money"
+          type="number"
+        />
+      </div>
+      <div class="input-time new-loan-form--item">
+        <label for="months">Plazo a devolver en meses: </label>
+        <input
+          id="input-number"
+          class="input-number time-input"
+          id="months"
+          placeholder="Meses"
+          type="number"
+        />
+      </div>
+      <div class="input-salary new-loan-form--item">
+        <label for="input-file">Cargue su recibo de sueldo:</label>
+        <input type="file" id="input-file" class="input-file-salary" />
+      </div>
+      <div class="input-terms new-loan-form--item">
+        <input
+          type="checkbox"
+          id="terms"
+          name="connected"
+          class="form-check-input"
+        />
+        <label for="terms" class="form-check.label">Acepto los</label>
+        <a href="/terminos.html">Términos y condiciones</a>
+      </div>
+      <div class="input-submit">
+        <button class="input-submit-button">Enviar solicitud</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
