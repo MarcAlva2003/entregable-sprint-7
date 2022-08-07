@@ -6,3 +6,7 @@ from .models import Project
 def login(request):
     projects = Project.objects.all()
     return render(request,'login/login.html')
+
+def register(request):
+    
+    return render(request,'loguin/register.html')

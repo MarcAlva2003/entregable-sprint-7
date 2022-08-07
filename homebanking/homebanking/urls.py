@@ -29,7 +29,11 @@ urlpatterns = [
     path('clientes/',Cliente_views.Clientes, name = 'clientes'),
     path('cuentas/',Cuentas_views.Cuentas, name = 'cuentas'),
     path('login/',login_views.login, name = 'login'),
+    path('register/',login_views.register, name = 'register'),
     path('prestamos/',prestamos_views.prestamos, name = 'prestamos'),
     path('tarjetas/',tarjetas_views.tarjetas, name = 'tarjetas'),
-    path('inversiones/',ITBANK_views.inversiones, name = 'inversiones')
+    path('inversiones/',ITBANK_views.inversiones, name = 'inversiones'),
+    path('perfil/',ITBANK_views.perfil, name = 'perfil'),
+    path('sucycajero/',ITBANK_views.sucycajero, name = 'sucycajero'),
+    path('terminos/',ITBANK_views.terminos, name = 'terminos')
 ]

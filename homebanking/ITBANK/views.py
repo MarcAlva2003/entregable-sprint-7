@@ -9,3 +9,16 @@ def home(request):
 def inversiones(request):
 
     return render(request,'ITBANK/inversiones.html')
+
+def terminos(request):
+
+    return render(request,'ITBANK/terminos.html')
+
+
+def sucycajero(request):
+
+    return render(request,'ITBANK/sucycajero.html')
+
+def perfil(request):
+    
+    return render(request,'ITBANK/perfil.html')
