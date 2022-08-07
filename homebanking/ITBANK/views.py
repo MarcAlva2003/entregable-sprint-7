@@ -5,3 +5,7 @@ from django.shortcuts import render
 def home(request):
     
     return render(request,'ITBANK/home.html')
+
+def inversiones(request):
+
+    return render(request,'ITBANK/inversiones.html')

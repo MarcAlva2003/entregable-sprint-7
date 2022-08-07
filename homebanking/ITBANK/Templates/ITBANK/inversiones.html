@@ -1,0 +1,76 @@
+{% extends 'ITBANK/base.html' %} 
+
+{% block title %}Inversiones{% endblock %}
+
+{% block styleFiles %}
+{%load static %}
+<link rel="stylesheet" href="{% static 'ITBANK/style/home.css' %}">
+<link rel="stylesheet" href="{% static 'ITBANK/style/inversiones.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<main>
+    <div class="publicidad-principal">
+      <div class="contenedor">
+        <h3 class="titulo">Todas las alternativas de inversión</h3>
+        <p class="descripcion">Desde tu cuenta podés acceder a Bonos, Acciones, Futuros de Dólar, Fondos Comunes de Inversión y más. Podés operar y realizar el seguimiento de tu cuenta estés donde estés directamente desde nuestra plataforma web o desde tu celular a través de nuestra app.</p>
+        <button role="button" class="boton"><i class="fa-solid fa-circle-info"></i>Más información</button> <!--El role button mejora accesibilidad-->
+      </div>
+    </div>
+
+    <div class="publicidades-paralelas">
+
+      <article class="publicidad-paralela-1">
+        <h3 class="title">Nunca fue tan facil</h3>
+        <p class="descripcion-v2">Inverti desde nuestra app</p>
+        <a href="App.html"></a><button role="button" class="boton-v2">+Info</button></a>
+      </article>
+
+      <article class="publicidad-paralela-2">
+        <h3 class="title">Ten el control</h3>
+        <p class="descripcion-v2">Visualiza el estado de todo tu dinero</p>
+        <a href="control.html"><button role="button" class="boton-v2">+Info</button></a>
+      </article>
+
+      <article class="publicidad-paralela-3">
+        <h3 class="title">Todo sobre criptomonedas</h3>
+        <p class="descripcion-v2">Sumergite en el mundo cripto</p>
+        <a href="criptomonedas.html"><button role="button" class="boton-v2">+Info</button></a>
+      </article>
+
+      <article class="publicidad-paralela-4">
+        <h3 class="title">Disfruta 24/7</h3>
+        <p class="descripcion-v2">Retira tu plata cuando y donde quieras</p>
+        <a href="App.html"><button role="button" class="boton-v2">+Info</button></a>
+      </article>
+
+    </div>
+  </main>
+
+  <div class="modelo-de-atencion">
+
+    <article class="columna1">
+      <h3 class="titulo-ma">Accesibilidad total</h3>
+      <hr>
+      <p class="descripcion-ma">Desde tu cuenta podés acceder a Bonos,Acciones, Futuros de Dolár, Fondos comunes de invercion y más </p>
+    </article>
+
+      <article class="columna1">
+        <h3 class="titulo-ma">Asesoramiento</h3>
+        <hr>
+        <p class="descripcion-ma">Te asignaremos un asesor personalizado que te guiara en el alta de tu cuenta, analizara tu perfil, diseñaran juntos una estrategia de inversion y seguira el desempeño de tu cartera.Podras contactarlo en todo momento. </p>
+      </article>
+
+        <article class="columna1">
+          <h3 class="titulo-ma">Operatoria online</h3>
+          <hr>
+          <p class="descripcion-ma">Podes operar y realizar seguimiento de tu cuenta estes donde estes directamente desde nuestra plataforma web o desde tu celular a travez de nuestra App.</p>
+        </article>
+  </div>
+
+    <script src="https://kit.fontawesome.com/c301eb48e5.js" crossorigin="anonymous"></script>
+    <script src="js/auth.js"></script>
+
+{% endblock %}

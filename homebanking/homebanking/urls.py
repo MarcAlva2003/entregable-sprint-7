@@ -31,5 +31,5 @@ urlpatterns = [
     path('login/',login_views.login, name = 'login'),
     path('prestamos/',prestamos_views.prestamos, name = 'prestamos'),
     path('tarjetas/',tarjetas_views.tarjetas, name = 'tarjetas'),
-
+    path('inversiones/',ITBANK_views.inversiones, name = 'inversiones')
 ]
