@@ -12,7 +12,7 @@ class Project(models.Model):    #Hereda de Django para obtener funcionalidad que
     updated = models.DateTimeField(auto_now=True,verbose_name="Fecha de actualizacion")
     from django.db import models
 
- class clientes(models.Model):
+class clientes(models.Model):
         customer_id=models.IntegerField()
         name=models.TextField(max_length=40)
         surname=models.TextField(max_length=25)
@@ -59,10 +59,9 @@ class tarjetas(models.Model):
         marca_tarjeta_id=models.IntegerField()
         account_id=models.IntegerField()
 
-    class Meta:
+class Meta:
         verbose_name = "proyecto"
         verbose_name_plural = "proyectos"
         ordering = ["-created"]
-
-    def __str__(self) -> str:
+def __str__(self) -> str:
         return self.tittle
