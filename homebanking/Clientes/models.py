@@ -51,8 +51,8 @@ class prestamos(models.Model):
 
 class tarjetas(models.Model):
         tarjeta_id=models.IntegerField()
-        numero_tarjeta=models.INT()
-        cvv=models.INT()
+        numero_tarjeta=models.IntegerField()
+        cvv=models.IntegerField()
         fecha_emision=models.TextField(max_length=200)
         fecha_vencimiento=models.TextField(max_length=50)
         tipo_tarjeta_id=models.IntegerField()
