@@ -13,8 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+#agregue
+from xml.dom.expatbuilder import DOCUMENT_NODE
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from ITBANK import views as ITBANK_views
 from Clientes import views as Cliente_views
 from Cuentas import views as Cuentas_views
@@ -22,6 +25,9 @@ from login import views as login_views
 from prestamos import views as prestamos_views
 from tarjetas import views as tarjetas_views
 
+#agregue
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,5 +41,11 @@ urlpatterns = [
     path('inversiones/',ITBANK_views.inversiones, name = 'inversiones'),
     path('perfil/',ITBANK_views.perfil, name = 'perfil'),
     path('sucycajero/',ITBANK_views.sucycajero, name = 'sucycajero'),
-    path('terminos/',ITBANK_views.terminos, name = 'terminos')
+    path('terminos/',ITBANK_views.terminos, name = 'terminos'),
+    #esto agregue
+    path('accounts/',include('django.contrib.auth.urls'))
 ]
+
+#agregue
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,DOCUMENT_root=settings.MEDIA_ROOT)
