@@ -64,9 +64,9 @@
           <li>
             <hr class="dropdown-divider" />
           </li>
-          <li>
+          <!-- <li>
             <a class="dropdown-item rounded-2" href="{% url 'login' %}" style="--bs-dropdown-link-hover-bg: #0d6efd">Cerrar Sesion</a>
-          </li>
+          </li> -->
 
           <li>
             <hr class="dropdown-divider" />
@@ -100,13 +100,15 @@
               <a class="nav-link" id="nav-link" href="{% url 'terminos' %}">Términos</a>
             </li>
 
+          
+          
             <!-- aqui agregamos "Acceder" y "Salir" al nav -->
             {% if not request.user.is_authenticated %}
-            <li class="nav-item">
+            <li class="nav-link-2">
                 <a class="nav-link" href="{% url 'login' %}">Acceder</a>
             </li>
             {% else %}
-            <li class="nav-item">
+            <li class="nav-item-2">
                 <a class="nav-link" href="{% url 'logout' %}">Salir</a>
             </li>
             {% endif %}
