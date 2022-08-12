@@ -11,6 +11,12 @@ header{
     color: rgb(255, 255, 255)
 }
 
+/* Hacer mediante Responsive
+.nav-link-2, .nav-item-2{
+    color: rgb(255, 255, 255);
+    text-align: right;
+    margin-right: -550px;
+} */
 .header-logo{
     height: 102px;
     background-color: var(--terciario) ;
