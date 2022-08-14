@@ -4,13 +4,13 @@ from django.db import models
 
 
 class Project(models.Model):    #Hereda de Django para obtener funcionalidad que yo necesito
-    tittle = models.CharField(max_length=200,verbose_name="Titulo")
-    description = models.TextField(verbose_name="Descripcion")
-    image = models.ImageField(upload_to='projects',verbose_name="Imagen",null=True, blank=True)
-    link =models.URLField(null=True,blank=True,verbose_name='Enlace Web')
-    created = models.DateTimeField(auto_now_add=True,verbose_name="Fecha de creacion")
-    updated = models.DateTimeField(auto_now=True,verbose_name="Fecha de actualizacion")
-    from django.db import models
+        tittle = models.CharField(max_length=200,verbose_name="Titulo")
+        description = models.TextField(verbose_name="Descripcion")
+        image = models.ImageField(upload_to='projects',verbose_name="Imagen",null=True, blank=True)
+        link =models.URLField(null=True,blank=True,verbose_name='Enlace Web')
+        created = models.DateTimeField(auto_now_add=True,verbose_name="Fecha de creacion")
+        updated = models.DateTimeField(auto_now=True,verbose_name="Fecha de actualizacion")
+        from django.db import models
 
 class clientes(models.Model):
         customer_id=models.IntegerField()
@@ -18,6 +18,7 @@ class clientes(models.Model):
         surname=models.TextField(max_length=25)
         dni=models.IntegerField()
         direccion=models.TextField(max_length=100)
+        tipo_cliente=models.TextField(max_length=30,default='tipo')
 
 class cuenta(models.Model):
         account_id=models.IntegerField()
