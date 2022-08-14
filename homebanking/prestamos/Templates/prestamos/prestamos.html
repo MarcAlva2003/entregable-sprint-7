@@ -35,35 +35,63 @@
 </div>
 
 <!-- NUEVO PRESTAMO -->
-<div class="new-loan section-container">
+<div class="new-loan section-container" id="formulario-prestamo">
     <div class="new-loan-background section-background">
         <div class="new-loan-heading">
             <h2>Pedir un préstamo</h2>
             <p>Completá el formulario para solicitar un nuevo préstamo</p>
         </div>
-        <div class="new-loan-form">
-            <div class="input-money-amount new-loan-form--item">
+        
+        <form class="new-loan-form" action="/prestamos/#formulario-prestamo" method="POST"> {% csrf_token %}   
+            <!-- <div class="input-money-amount new-loan-form--item">
                 <label for="money">Cantidad de dinero (pesos):</label>
-                <input id="input-number" class="input-number money-input" placeholder="ARS" id="money" type="number" />
+                <input id="input-number" class="input-number money-input" placeholder="ARS" id="money" type="number" name="amount-money-loan" />
             </div>
             <div class="input-time new-loan-form--item">
                 <label for="months">Plazo a devolver en meses: </label>
                 <input id="input-number" class="input-number time-input" id="months" placeholder="Meses"
-                    type="number" />
+                    type="number" name="amount-time-loan"/>
             </div>
             <div class="input-salary new-loan-form--item">
                 <label for="input-file">Cargue su recibo de sueldo:</label>
-                <input type="file" id="input-file" class="input-file-salary" />
+                <input type="file" id="input-file" class="input-file-salary" name="user-salary-loan" />
             </div>
             <div class="input-terms new-loan-form--item">
-                <input type="checkbox" id="terms" name="connected" class="form-check-input" />
+                <input type="checkbox" id="terms" name="connected" class="form-check-input" name="loan-terms-conditions"/>
                 <label for="terms" class="form-check.label">Acepto los</label>
                 <a href="/terminos.html">Términos y condiciones</a>
-            </div>
+            </div> -->
+            <table>
+                {{form.as_p}}
+            </table>
             <div class="input-submit">
-                <button class="input-submit-button">Enviar solicitud</button>
+                <input class="input-submit-button" type="submit" value="Enviar solicitud">
+                <!-- <button class="input-submit-button">Enviar solicitud</button> -->
             </div>
-        </div>
+        </form>
+        {% if 'ok' in request.GET %}
+        <p class="text-success mt-3"><b>Se ha cargado la solicitud de prestamo. En caso de ser aprobado, lo contactaremos via mail</b></p>
+        {% endif %}
+        {% if 'amounterror' in request.GET %}
+        <p  class="text-danger mt-3">
+            <b>
+                El monto de dinero ingresado es mayor al que puede solicitar.
+            </b>
+        </p>
+        <p class="text-danger">
+            Mejore su tipo de cliente para poder solicitar prestamos de mayor cantidad
+        </p>
+        <p class="text-danger">
+            (Tipo de cliente que posee: {{client_type}})
+        </p>
+        {% endif %}
+        {% if 'errorblack' in request.GET %}
+        <p class="text-danger mt-3">
+            <b>
+                El monto de dinero ingresado es mayor al que puede solicitar.
+            </b>
+        </p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
