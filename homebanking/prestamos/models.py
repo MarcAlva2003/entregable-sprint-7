@@ -1,19 +1,13 @@
 from django.db import models
+from Clientes.models import Project
 
 # Create your models here.
 
-class Project(models.Model):    #Hereda de Django para obtener funcionalidad que yo necesito
-    tittle = models.CharField(max_length=200,verbose_name="Titulo")
-    description = models.TextField(verbose_name="Descripcion")
-    image = models.ImageField(upload_to='projects',verbose_name="Imagen",null=True, blank=True)
-    link =models.URLField(null=True,blank=True,verbose_name='Enlace Web')
-    created = models.DateTimeField(auto_now_add=True,verbose_name="Fecha de creacion")
-    updated = models.DateTimeField(auto_now=True,verbose_name="Fecha de actualizacion")
-
-    class Meta:
-        verbose_name = "proyecto"
-        verbose_name_plural = "proyectos"
-        ordering = ["-created"]
+class PrestamoCliente(models.Model):    #Hereda de Django para obtener funcionalidad que yo necesito
+    monto = models.FloatField(max_length=200,verbose_name="nombre")
+    meses = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True,verbose_name="Fecha de pedido")
+    prestamo = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.tittle
+        return self.monto,self.meses,self.created

@@ -29,7 +29,19 @@
     <div class="loans-background section-background">
         <h2>Mis préstamos</h2>
         <div class="loans-list">
-            <p>Aún no tiene ningún prestamo</p>
+            {% if prestamos_db %}
+            <p>Prestamos: {{prestamos_db|length}} prestamos</p>
+            <ul>
+                {% for prestamo in prestamos_db %}
+                    <li>
+                        {{prestamo.loan_type}} &nbsp; seccion: {{prestamo.loan_total}}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>Aún no tiene ningún prestamo</p>
+            {% endif %}
+            
         </div>
     </div>
 </div>
@@ -41,26 +53,7 @@
             <h2>Pedir un préstamo</h2>
             <p>Completá el formulario para solicitar un nuevo préstamo</p>
         </div>
-        
-        <form class="new-loan-form" action="/prestamos/#formulario-prestamo" method="POST"> {% csrf_token %}   
-            <!-- <div class="input-money-amount new-loan-form--item">
-                <label for="money">Cantidad de dinero (pesos):</label>
-                <input id="input-number" class="input-number money-input" placeholder="ARS" id="money" type="number" name="amount-money-loan" />
-            </div>
-            <div class="input-time new-loan-form--item">
-                <label for="months">Plazo a devolver en meses: </label>
-                <input id="input-number" class="input-number time-input" id="months" placeholder="Meses"
-                    type="number" name="amount-time-loan"/>
-            </div>
-            <div class="input-salary new-loan-form--item">
-                <label for="input-file">Cargue su recibo de sueldo:</label>
-                <input type="file" id="input-file" class="input-file-salary" name="user-salary-loan" />
-            </div>
-            <div class="input-terms new-loan-form--item">
-                <input type="checkbox" id="terms" name="connected" class="form-check-input" name="loan-terms-conditions"/>
-                <label for="terms" class="form-check.label">Acepto los</label>
-                <a href="/terminos.html">Términos y condiciones</a>
-            </div> -->
+
             <table>
                 {{form.as_p}}
             </table>
