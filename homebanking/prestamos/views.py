@@ -1,27 +1,35 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .models import Project
-from django.contrib.auth.decorators import login_required
-from prestamos.forms import PrestamosForm
+from .forms import LoanForm
 from django.urls import reverse
-from Clientes.models import prestamos as Prestamos
-from datetime import date
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 @login_required
 def prestamos(request):
-    prestamo_form = PrestamosForm()
+    user_client_type = 'classic'
+    loan_form = LoanForm()
+    if request.method == "POST":
+        loan_form = LoanForm(data=request.POST)
+
+        if loan_form.is_valid():
+            money_amount = int(request.POST.get('moneyAmount'))
+            
+            if (user_client_type == 'classic') and (money_amount > 100000):
+                print('CLASSIC MAYOR')
+                return redirect(reverse('prestamos') + "?amounterror")
+            elif (user_client_type == 'gold') and (money_amount > 300000):
+                print('GOLD MAYOR')
+                return redirect(reverse('prestamos') + "?amounterror")
+            elif money_amount > 500000:
+                print('BLACK MAYOR')
+                return redirect(reverse('prestamos') + "?errorblack")
+            else:
+                print('IF 2')
+                return redirect(reverse('prestamos') + "?ok")
+
     projects = Project.objects.all()
+    return render(request,'prestamos/prestamos.html', {'form':loan_form, 'client_type':user_client_type })
 
-    if request.method == 'POST':
-        contact_form = PrestamosForm(data = request.POST)
-        if prestamo_form.is_valid():
-            monto_recibido = request.POST.get('monto','')
-            meses_recibidos = request.POST.get('meses','')
-            archivo_recibido = request.POST.get('archivo','')
-        projectReceived = Project.object.get(pk=2)
-        prestamo_recibido = Prestamos(loan_total = monto_recibido) #ACA TENGO QUE CREAR EL OBJETO PRESTAMO A CARGAR EN LA TABLA 
-        #min 30 vidio clase
-    return render(request,'prestamos/prestamos.html',{'projects':projects,'form': prestamo_form})
-
-
-    
+        # print(request.user.username)
