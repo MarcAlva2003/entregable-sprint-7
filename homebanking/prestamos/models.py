@@ -1,13 +1,20 @@
 from django.db import models
 from Clientes.models import Project
+from django import forms
 
 # Create your models here.
 
-class PrestamoCliente(models.Model):    #Hereda de Django para obtener funcionalidad que yo necesito
-    monto = models.FloatField(max_length=200,verbose_name="nombre")
-    meses = models.IntegerField()
-    created = models.DateTimeField(auto_now_add=True,verbose_name="Fecha de pedido")
-    prestamo = models.ForeignKey(Project, on_delete=models.CASCADE)
+class LoanForm(forms.Form):
+    moneyAmount = forms.IntegerField(label='Cantidad de dinero a pedir', required=True)
+    monthsAmount = forms.IntegerField(label='Plazo en meses a pagar', required=True)
+    customerSalary = forms.IntegerField(label='Ingreso mensual total', required=True)
+    LOAN_TYPE_CHOICES = (
+        ('hipotecario', 'Hipotecario'),
+        ('prendario', 'Prendario'),
+        ('personales', 'Personales'),
+        ('con garantia', 'Con garantia'),
+        ('sin garantia', 'Sin garantia'),
 
-    def __str__(self) -> str:
-        return self.monto,self.meses,self.created
+    )
+    loanType = forms.ChoiceField(label='Seleccione tipo de prestamo a solititar', choices=LOAN_TYPE_CHOICES)
+    termsAndConds = forms.BooleanField(label='Terminos y condiciones', required=True)
