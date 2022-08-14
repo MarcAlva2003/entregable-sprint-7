@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from Clientes.models import clientes
 from .models import Project
 from .forms import LoanForm
 from django.urls import reverse
@@ -8,14 +9,16 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def prestamos(request):
+    helper = clientes.objects.values('tipo_cliente')[0]
     user_client_type = 'classic'
+    print(helper)
     loan_form = LoanForm()
     if request.method == "POST":
         loan_form = LoanForm(data=request.POST)
-
+        
         if loan_form.is_valid():
             money_amount = int(request.POST.get('moneyAmount'))
-            
+            print()
             if (user_client_type == 'classic') and (money_amount > 100000):
                 print('CLASSIC MAYOR')
                 return redirect(reverse('prestamos') + "?amounterror")
