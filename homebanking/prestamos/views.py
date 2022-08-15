@@ -10,6 +10,7 @@ from datetime import datetime
 # Create your views here.
 @login_required
 def prestamos(request):
+
     helper = clientes.objects.values('tipo_cliente')[0]
     user_client_type = 'classic'
     print(helper)
@@ -33,15 +34,15 @@ def prestamos(request):
                 print('IF 2')
                 return redirect(reverse('prestamos') + "?ok")
 
-    projects = Project.objects.all() #Hay que hacer un .get filtrando por id de cliente y mostrar todos los prestamos
+    prestamos_db = Prestamos.objects.all() #Hay que hacer un .get filtrando por id de cliente y mostrar todos los prestamos
     #a la data que obtengo de aca hay que mostrarla en el content superior
     if loan_form.is_valid():
         money_amount = int(request.POST.get('moneyAmount'))
         monthsAmount_received = int(request.POST.get('monthsAmount'))
         loanType_received = int(request.POST.get('loanType'))
-        prestamo = Prestamos(loan_approved_date=datetime.now(),loan_month = monthsAmount_received,loan_total=money_amount,loanType = loanType_received)
-        prestamo.save()
-
-    return render(request,'prestamos/prestamos.html', {'form':loan_form, 'client_type':user_client_type})
+        prestamo = Prestamos.objects.create(loan_approved_date=datetime.now(),loan_month = monthsAmount_received,loan_total=money_amount,loanType = loanType_received)
+        #prestamo.save()
+        #return redirect('/',{'prestamos_db':prestamos_db,'form':loan_form, 'client_type':user_client_type})
+    return render(request,'prestamos/prestamos.html', {'prestamos_db':prestamos_db,'form':loan_form, 'client_type':user_client_type})
 
         # print(request.user.username)
