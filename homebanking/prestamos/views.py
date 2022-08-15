@@ -9,9 +9,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def prestamos(request):
-    helper = clientes.objects.values('tipo_cliente')[0]
-    user_client_type = 'classic'
-    print(helper)
+    helper = clientes.objects.filter(id__icontains = request.user.id)
+    user_client_type = helper[0].tipo_cliente
+    print(helper[0].tipo_cliente)
     loan_form = LoanForm()
     if request.method == "POST":
         loan_form = LoanForm(data=request.POST)
