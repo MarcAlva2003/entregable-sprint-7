@@ -33,15 +33,15 @@
             <p>Prestamos: {{prestamos_db|length}} prestamos</p>
             <ul>
                 {% for prestamo in prestamos_db %}
-                <li>
-                    {{prestamo.loan_type}} &nbsp; seccion: {{prestamo.loan_total}}
-                </li>
+                    <li>
+                        {{prestamo.loan_type}} &nbsp; seccion: {{prestamo.loan_total}}
+                    </li>
                 {% endfor %}
             </ul>
             {% else %}
-            <p>Aún no tiene ningún prestamo</p>
+                <p>Aún no tiene ningún prestamo</p>
             {% endif %}
-
+            
         </div>
     </div>
 </div>

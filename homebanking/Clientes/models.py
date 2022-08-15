@@ -1,5 +1,7 @@
+from asyncio.windows_events import NULL
 from datetime import datetime
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -41,10 +43,11 @@ class movimientos(models.Model):
         hora=models.DateTimeField()
 
 class prestamos(models.Model):
-        loan_approved_date=models.DateField(default=datetime.now())
+        loan_approved_date=models.DateField(timezone.now())
         loan_month=models.IntegerField(default=1)
         loan_total=models.FloatField(default=0)
         loanType=models.TextField(max_length=40, default='Personales')
+        id_cliente=models.IntegerField(default=NULL)
         
 
 class tarjetas(models.Model):
