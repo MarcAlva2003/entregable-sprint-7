@@ -31,13 +31,26 @@
         <div class="loans-list">
             {% if prestamos_db %}
             <p>Prestamos: {{prestamos_db|length}} prestamos</p>
-            <ul>
-                {% for prestamo in prestamos_db %}
-                <li>
-                    Tipo: {{prestamo.loanType}} &nbsp; Total: {{prestamo.loan_total}} &nbsp; Cuotas: {{prestamo.loan_month}} &nbsp; Fecha : {{prestamo.loan_approved_date}}
-                </li>
-                {% endfor %}
-            </ul>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Total (ARS$)</th>
+                        <th scope="col">Cuotas</th>
+                        <th scope="col">Fecha</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for prestamo in prestamos_db %}
+                        <tr>
+                            <td>{{prestamo.loanType}}</td>
+                            <td>{{prestamo.loan_total}}</td>
+                            <td>{{prestamo.loan_month}}</td>
+                            <td>{{prestamo.loan_approved_date}}</td>
+                          </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
             {% else %}
             <p>Aún no tiene ningún prestamo</p>
             {% endif %}
