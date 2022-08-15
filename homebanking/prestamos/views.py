@@ -10,10 +10,16 @@ from datetime import datetime
 # Create your views here.
 @login_required
 def prestamos(request):
+<<<<<<< HEAD
 
     helper = clientes.objects.values('tipo_cliente')[0]
     user_client_type = 'classic'
     print(helper)
+=======
+    helper = clientes.objects.filter(id__icontains = request.user.id)
+    user_client_type = helper[0].tipo_cliente
+    print(helper[0].tipo_cliente)
+>>>>>>> c060f30ff376d53d2e19e0e36200146c2596b2f1
     loan_form = LoanForm()
     if request.method == "POST":
         loan_form = LoanForm(data=request.POST)
