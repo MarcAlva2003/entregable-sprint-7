@@ -4,7 +4,8 @@
     padding: 10px 0 10px 0px ;
 }
 .footer2{
-    background-color: #88a7d0;}
+    background-color: #88a7d0;
+}
 footer {
     /* padding: 15px 0px 0px 0px; */
     /* margin: 25px 0px 0px 0px; */
@@ -17,7 +18,11 @@ footer {
 
 }
 a{
-    color: #fff;
+    color: #fff !important;
+}
+a:hover{
+    color: rgb(126, 152, 255) !important;
+
 }
 
 #links{
