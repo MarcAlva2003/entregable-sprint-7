@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -40,9 +41,11 @@ class movimientos(models.Model):
         hora=models.DateTimeField()
 
 class prestamos(models.Model):
-        loan_type=models.TextField(max_length=200)
-        loan_date=models.TextField(max_length=500)
-        loan_total=models.IntegerField()
+        loan_approved_date=models.DateField(default=datetime.now())
+        loan_month=models.IntegerField(default=1)
+        loan_total=models.FloatField(default=0)
+        loanType=models.TextField(max_length=40, default='Personales')
+        
 
 class tarjetas(models.Model):
         numero_tarjeta=models.IntegerField()
