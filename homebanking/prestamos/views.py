@@ -15,7 +15,6 @@ def prestamos(request):
 
     helper = clientes.objects.filter(id__icontains = request.user.id)
     user_client_type = helper[0].tipo_cliente
-    print(helper[0].tipo_cliente)
     loan_form = LoanForm()
 
     if request.method == "POST":
