@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 
 # Create your models here.
@@ -9,6 +10,8 @@ class Project(models.Model):    #Hereda de Django para obtener funcionalidad que
     link =models.URLField(null=True,blank=True,verbose_name='Enlace Web')
     created = models.DateTimeField(auto_now_add=True,verbose_name="Fecha de creacion")
     updated = models.DateTimeField(auto_now=True,verbose_name="Fecha de actualizacion")
+    owner = models.ForeignKey('auth.user', related_name='posts', on_delete= models.CASCADE)
+
 
     class Meta:
         verbose_name = "proyecto"
@@ -16,4 +19,4 @@ class Project(models.Model):    #Hereda de Django para obtener funcionalidad que
         ordering = ["-created"]
 
     def __str__(self) -> str:
-        return self.tittle
+        return self.tittle 
