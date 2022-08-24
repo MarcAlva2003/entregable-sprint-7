@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from Clientes.models import clientes
-from ITBANK.models import Project
 from .forms import LoanForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -42,5 +41,3 @@ def prestamos(request):
                 prestamo.save()
 
     return render(request,'prestamos/prestamos.html', {'prestamos_db':prestamos_db,'form':loan_form, 'client_type':user_client_type})
-
-        # print(request.user.username)
