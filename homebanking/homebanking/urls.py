@@ -24,6 +24,10 @@ from Cuentas import views as Cuentas_views
 from login import views as login_views
 from prestamos import views as prestamos_views
 from tarjetas import views as tarjetas_views
+#imports de las apis
+from api.views import ClienteLists,ClienteDetails,UserDetail,UserList
+
+
 
 #agregue
 from django.conf import settings
@@ -43,7 +47,12 @@ urlpatterns = [
     path('sucycajero/',ITBANK_views.sucycajero, name = 'sucycajero'),
     path('terminos/',ITBANK_views.terminos, name = 'terminos'),
     #esto agregue
-    path('accounts/',include('django.contrib.auth.urls'))
+    path('accounts/',include('django.contrib.auth.urls')),
+    #endpoints de la api
+    path('api/clientes/',ClienteLists.as_view()),
+    path('api/clientes/<int:pk>',ClienteDetails.as_view()),
+    path('api/users/', UserList.as_view()),
+    path('api/users/<int:pk>/', UserDetail.as_view()),
 ]
 
 #agregue

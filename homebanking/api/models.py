@@ -1,3 +1,7 @@
-from django.db import models
-
+from Clientes.models import clientes
+from django.contrib import admin
 # Create your models here.
+class ClienteAdmin (admin.ModelAdmin):
+    readonly_fields = ('created-at','updated-at')
+    admin.site.register(clientes)
+
