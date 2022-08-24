@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from Clientes.models import clientes
-from .models import Project
+from ITBANK.models import Project
 from .forms import LoanForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from Clientes.models import prestamos as Prestamos
+from prestamos.models import prestamos as Prestamos
 from datetime import datetime
 
 # Create your views here.

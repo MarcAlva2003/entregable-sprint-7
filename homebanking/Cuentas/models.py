@@ -17,3 +17,15 @@ class Project(models.Model):    #Hereda de Django para obtener funcionalidad que
 
     def __str__(self) -> str:
         return self.tittle
+
+class cuenta(models.Model):
+        account_id=models.IntegerField()
+        balance=models.IntegerField()
+        iban=models.TextField(max_length=100)
+        tipo_de_cuenta_id=models.IntegerField()
+
+class movimientos(models.Model):
+        iban=models.TextField(max_length=100)
+        monto=models.IntegerField()
+        tipo_operacion=models.TextField(max_length=200)
+        hora=models.DateTimeField()
