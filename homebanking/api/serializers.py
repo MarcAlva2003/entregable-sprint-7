@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from Clientes.models import clientes
 from django.contrib.auth.models import User
+from Clientes.models import clientes
 from sucursales.models import Sucursal
 
 class ClienteSerializer(serializers.ModelSerializer):
