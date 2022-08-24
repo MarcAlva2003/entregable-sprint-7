@@ -1,5 +1,5 @@
 from Clientes.models import clientes
-from api.serializers import ClienteSerializer,UserSerializer
+from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -50,3 +50,28 @@ class UserDetail(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class SucursalLists(APIView):
+    def post(self, request, format=None):
+        serializer = SucursalSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def get(self, request): # nuevo
+        sucursales = Sucursal.objects.all().order_by('created_at')
+        serializer = SucursalSerializer(sucursales, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+# una sucursal
+class SucursalDetails(APIView):
+    def get(self, request, pk):
+        sucursal = Sucursal.objects.filter(pk=pk).first()
+        serializer = SucursalSerializer(sucursal)
+        if sucursal:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+#una sucursal
