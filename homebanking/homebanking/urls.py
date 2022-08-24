@@ -25,7 +25,7 @@ from login import views as login_views
 from prestamos import views as prestamos_views
 from tarjetas import views as tarjetas_views
 #imports de las apis
-from api.views import ClienteLists,ClienteDetails, PrestamoList,UserDetail,UserList,SucursalLists,SucursalDetails,PrestamoDetails,TarjetasDeCliente
+from api.views import ClienteLists,ClienteDetails, PrestamoList,UserDetail,UserList,SucursalLists,SucursalDetails,PrestamoDetails,TarjetasDeCliente, MontoPrestamosDeCliente
 
 
 
@@ -58,6 +58,7 @@ urlpatterns = [
     path('api/sucursales/<int:pk>/',SucursalDetails.as_view()),
     path('api/prestamopost/', PrestamoList.as_view()),
     path('api/prestamodelete/<int:pk>',PrestamoDetails.as_view()),
+    path('api/montos-prestamo-cliente/<int:customer_id>',MontoPrestamosDeCliente.as_view()),
 ]
 
 #agregue
