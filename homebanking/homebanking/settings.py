@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'registration',
     'api',
     'sucursales',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
