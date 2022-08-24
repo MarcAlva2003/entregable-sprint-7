@@ -8,6 +8,7 @@ from Clientes.models import prestamos as Prestamos
 from datetime import datetime
 
 # Create your views here.
+
 @login_required
 def prestamos(request):
 
@@ -33,8 +34,6 @@ def prestamos(request):
                 print('BLACK MAYOR')
                 return redirect(reverse('prestamos') + "?errorblack")
             else:
-                #print('IF 2')
-                #return redirect(reverse('prestamos') + "?ok")
                 money_amount = int(request.POST.get('moneyAmount'))
                 monthsAmount_received = int(request.POST.get('monthsAmount'))
                 loanType_received = request.POST.get('loanType')
