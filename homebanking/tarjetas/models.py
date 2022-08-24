@@ -12,20 +12,20 @@ class Project(models.Model):    #Hereda de Django para obtener funcionalidad que
     updated = models.DateTimeField(auto_now=True,verbose_name="Fecha de actualizacion")
     owner = models.ForeignKey('auth.user', related_name='posts', on_delete= models.CASCADE)
 
-class tarjetas(models.Model):
-        numero_tarjeta=models.IntegerField()
-        cvv=models.IntegerField()
-        fecha_emision=models.TextField(max_length=200)
-        fecha_vencimiento=models.TextField(max_length=50)
-        tipo_tarjeta_id=models.IntegerField()
-        marca_tarjeta_id=models.IntegerField()
-        account_id=models.IntegerField()
-
+class Tarjetas(models.Model):
+    numero_tarjeta = models.IntegerField()
+    cvv = models.IntegerField()
+    fecha_emision = models.DateTimeField(auto_now_add=True)
+    fecha_vencimiento = models.DateTimeField()
+    tipo_tarjeta = models.TextField(max_length=20)
+    marca_tarjeta = models.TextField(max_length=20)
+    account_id = models.IntegerField()
+    customer_id = models.IntegerField()
 
 class Meta:
-        verbose_name = "proyecto"
-        verbose_name_plural = "proyectos"
-        ordering = ["-created"]
+    ordering = ("-customer_id",)
+    verbose_name = "Tarjeta"
+    verbose_name_plural = "Tarjetas"
 
-def __str__(self) -> str:
-        return self.tittle 
+def __str__(self):
+    return self.title

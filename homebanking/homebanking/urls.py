@@ -25,7 +25,7 @@ from login import views as login_views
 from prestamos import views as prestamos_views
 from tarjetas import views as tarjetas_views
 #imports de las apis
-from api.views import ClienteLists,ClienteDetails, PrestamoList,UserDetail,UserList,SucursalLists,SucursalDetails,PrestamoDetails
+from api.views import ClienteLists,ClienteDetails, PrestamoList,UserDetail,UserList,SucursalLists,SucursalDetails,PrestamoDetails,TarjetasDeCliente
 
 
 
@@ -46,6 +46,7 @@ urlpatterns = [
     path('perfil/',ITBANK_views.perfil, name = 'perfil'),
     path('sucycajero/',ITBANK_views.sucycajero, name = 'sucycajero'),
     path('terminos/',ITBANK_views.terminos, name = 'terminos'),
+    path('api/tarjetas-cliente/<int:customer_id>', TarjetasDeCliente.as_view()),
     #esto agregue
     path('accounts/',include('django.contrib.auth.urls')),
     #endpoints de la api

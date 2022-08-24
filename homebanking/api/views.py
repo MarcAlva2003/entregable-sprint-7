@@ -7,6 +7,8 @@ from rest_framework import status,generics,permissions
 from django.contrib.auth.models import User
 from prestamos.models import prestamos as Prestamo
 from .serializers import PrestamoSerializer
+from tarjetas.models import Tarjetas
+from tarjetas.serializer import TarjetaSerializer
 
 
 # Create your views here.
@@ -100,3 +102,13 @@ class PrestamoDetails(APIView):
             prestamo.delete()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+# Tarjetas asociadas a un cliente
+
+class TarjetasDeCliente(APIView):
+    def get(self, request, customer_id):
+        tarjeta = Tarjetas.objects.filter(customer_id=customer_id)
+        serializer = TarjetaSerializer(tarjeta, many =  True)
+        if tarjeta:
+            return Response(serializer.data, status= status.HTTP_200_OK)
+        return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
