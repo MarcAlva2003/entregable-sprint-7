@@ -1,8 +1,9 @@
 from msilib.schema import Class
+from re import search
 from tkinter import Variable
 from Clientes.models import clientes
 from Cuentas.views import Cuentas
-from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal
+from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal,BalanceCuentaSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -157,5 +158,10 @@ class MontoPrestamosDeCliente(APIView):
 class BalanceDeCuentaDeCliente(APIView):
     def get(self, request):
         clienteId = request.user.customer_id
-        cliente = clientes.objects.filter (pk=request.user.customer_id).first()
-        cuenta = Cuenta.objects.filter (pk=cliente.cuenta_id)
+        #cliente = clientes.objects.filter (pk=request.user.customer_id).first()
+        cuenta = Cuenta.objects.filter (customer_id=request.user.customer_id)
+
+        serializer = BalanceCuentaSerializer(cuenta, many = True)
+        if cuenta:
+            return Response(serializer.data, status= status.HTTP_200_OK)
+        return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
