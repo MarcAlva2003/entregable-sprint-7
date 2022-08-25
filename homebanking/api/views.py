@@ -157,10 +157,10 @@ class MontoPrestamosDeCliente(APIView):
 # BALANCE DE CUENTA DE CLIENTE
 class BalanceDeCuentaDeCliente(APIView):
     def get(self, request):
-        clienteId = request.user.customer_id
-        #cliente = clientes.objects.filter (pk=request.user.customer_id).first()
-        cuenta = Cuenta.objects.filter (customer_id=request.user.customer_id)
-
+        # usuario = User.objects.filter(pk = request.user.id).first()
+        cuenta = Cuenta.objects.filter (user_email=request.user.email)
+        print(request.user.email)
+        # print(request.user.email)
         serializer = BalanceCuentaSerializer(cuenta, many = True)
         if cuenta:
             return Response(serializer.data, status= status.HTTP_200_OK)
