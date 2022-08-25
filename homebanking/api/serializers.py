@@ -49,3 +49,6 @@ class PrestamoSerializer(serializers.ModelSerializer):
             "id_cliente",
             "created_at",
         )
+
+class MontoPrestamosDeClienteSerializer(serializers.Serializer):
+    loan_total = serializers.FloatField()
