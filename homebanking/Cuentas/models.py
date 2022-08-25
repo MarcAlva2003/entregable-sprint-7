@@ -23,6 +23,7 @@ class cuenta(models.Model):
         iban=models.TextField(max_length=24)
         tipo_de_cuenta=models.TextField(max_length=20, null=True)
         customer_id=models.IntegerField(null=True)
+        user_email=models.EmailField(max_length=254, null=True)
 
         def __repr__(self):
                 return f'saldo: {self.balance}, id_cliente: {self.account_id}'
