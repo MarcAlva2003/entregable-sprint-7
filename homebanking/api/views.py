@@ -5,7 +5,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status,generics,permissions
 from django.contrib.auth.models import User
+from prestamos.models import prestamos as Prestamo
+from .serializers import PrestamoSerializer, MontoPrestamosDeClienteSerializer
+from tarjetas.models import Tarjetas
+from tarjetas.serializer import TarjetaSerializer
+
+
+
 # Create your views here.
+
 class ClienteLists(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def post(self, request, format=None):
@@ -75,3 +83,42 @@ class SucursalDetails(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 #una sucursal
+
+class PrestamoList(APIView):
+    
+    def post(self, request, format=None):
+        serializer = PrestamoSerializer(data=request.data) 
+        if serializer.is_valid(): 
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PrestamoDetails(APIView):
+
+    def delete(self,request, pk):
+        #borra un prestamo con un id determinado
+        prestamo = Prestamo.objects.filter(pk=pk).first()
+        if prestamo:
+            serializer = PrestamoSerializer(prestamo)
+            prestamo.delete()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+# Tarjetas asociadas a un cliente
+
+class TarjetasDeCliente(APIView):
+    def get(self, request, customer_id):
+        tarjeta = Tarjetas.objects.filter(customer_id=customer_id)
+        serializer = TarjetaSerializer(tarjeta, many =  True)
+        if tarjeta:
+            return Response(serializer.data, status= status.HTTP_200_OK)
+        return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
+
+# OBTENER MONTO DE PRESTAMOS DE UN CLIENTE
+class MontoPrestamosDeCliente(APIView):
+    def get(self, request, customer_id):
+        prestamo = Prestamo.objects.filter(id_cliente=customer_id)
+        serializer = MontoPrestamosDeClienteSerializer(prestamo, many= True)
+        if prestamo:
+            return Response(serializer.data, status= status.HTTP_200_OK)
+        return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
