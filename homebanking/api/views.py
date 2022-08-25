@@ -1,4 +1,5 @@
 from Clientes.models import clientes
+from Cuentas.views import Cuentas
 from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal
 from django.http import Http404
 from rest_framework.views import APIView
@@ -6,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status,generics,permissions
 from django.contrib.auth.models import User
 from prestamos.models import prestamos as Prestamo
+from prestamos.views import consultar, modificar,conectar,consultar
+from Cuentas.models import cuenta as Cuenta
 from .serializers import PrestamoSerializer, MontoPrestamosDeClienteSerializer
 from tarjetas.models import Tarjetas
 from tarjetas.serializer import TarjetaSerializer
@@ -93,6 +96,19 @@ class PrestamoList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# def consultarSaldo(id):
+#     conexion,cursor = conectar()
+#     cursor.execute("SELECT id,account_id,balance,tipo_de_cuenta_id from Cuentas_cuenta")
+
+#     for fila in cursor:
+#         if fila[0] == id:
+#             monto = fila[2]
+
+#     conexion.close()
+
+#     return monto
+
+
 class PrestamoDetails(APIView):
 
     def delete(self,request, pk):
@@ -100,6 +116,16 @@ class PrestamoDetails(APIView):
         prestamo = Prestamo.objects.filter(pk=pk).first()
         if prestamo:
             serializer = PrestamoSerializer(prestamo)
+            
+            prestamo = Prestamo.objects.get(pk = pk)
+            cliente_id = prestamo.id_cliente
+            cuenta = Cuenta.objects.get( account_id = cliente_id)
+            monto_descuento = prestamo.loan_total
+            monto_actual = cuenta.balance
+            monto_actualizado = monto_actual - monto_descuento
+            cuenta.balance = monto_actualizado
+            cuenta.save()
+
             prestamo.delete()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_404_NOT_FOUND)

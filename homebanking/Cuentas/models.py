@@ -24,6 +24,9 @@ class cuenta(models.Model):
         iban=models.TextField(max_length=100)
         tipo_de_cuenta_id=models.IntegerField()
 
+        def __repr__(self):
+                return f'saldo: {self.balance}, id_cliente: {self.account_id}'
+
 class movimientos(models.Model):
         iban=models.TextField(max_length=100)
         monto=models.IntegerField()
