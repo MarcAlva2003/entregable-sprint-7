@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from Clientes.models import clientes
 from sucursales.models import Sucursal
 from prestamos.models import prestamos as Prestamos
+from Cuentas.models import cuenta
+
+class BalanceCuentaSerializer(serializers.Serializer):
+    balance=serializers.IntegerField()
+
 
 class ClienteSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')

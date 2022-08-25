@@ -1,3 +1,5 @@
+from msilib.schema import Class
+from tkinter import Variable
 from Clientes.models import clientes
 from Cuentas.views import Cuentas
 from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal
@@ -12,6 +14,7 @@ from Cuentas.models import cuenta as Cuenta
 from .serializers import PrestamoSerializer, MontoPrestamosDeClienteSerializer
 from tarjetas.models import Tarjetas
 from tarjetas.serializer import TarjetaSerializer
+from Clientes.models import clientes
 
 
 
@@ -148,3 +151,11 @@ class MontoPrestamosDeCliente(APIView):
         if prestamo:
             return Response(serializer.data, status= status.HTTP_200_OK)
         return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
+
+
+# BALANCE DE CUENTA DE CLIENTE
+class BalanceDeCuentaDeCliente(APIView):
+    def get(self, request):
+        clienteId = request.user.customer_id
+        cliente = clientes.objects.filter (pk=request.user.customer_id).first()
+        cuenta = Cuenta.objects.filter (pk=cliente.cuenta_id)
