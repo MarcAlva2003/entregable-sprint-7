@@ -5,5 +5,6 @@ from django.contrib import admin
 from .models import cuenta
 
 class CuentaAdmin (admin.ModelAdmin):
-    pass
-admin.site.register(cuenta)
+    readonly_fields= ('id')
+    admin.site.register(cuenta)
+# admin.site.register(cuenta)
