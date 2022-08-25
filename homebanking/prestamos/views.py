@@ -3,10 +3,15 @@ from Clientes.models import clientes
 from .forms import LoanForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from prestamos.models import prestamos as Prestamos
+from .models import prestamos as Prestamos
 from datetime import datetime
+from Cuentas.models import cuenta as Cuenta
 
 # Create your views here.
+
+def edit(request,id_cliente):
+    cliente = Cuenta.objects.get(pk = id_cliente)
+    
 
 @login_required
 def prestamos(request):
@@ -38,6 +43,7 @@ def prestamos(request):
                 loanType_received = request.POST.get('loanType')
                 id_cliente_received = request.user.id
                 prestamo = Prestamos(loan_approved_date=datetime.now(),loan_month = monthsAmount_received,loan_total=money_amount,loanType = loanType_received,id_cliente = id_cliente_received)
+                
                 prestamo.save()
 
     return render(request,'prestamos/prestamos.html', {'prestamos_db':prestamos_db,'form':loan_form, 'client_type':user_client_type})

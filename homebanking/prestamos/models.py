@@ -14,7 +14,7 @@ class prestamos(models.Model):
         id_cliente=models.IntegerField(default=NULL)
 
         class Meta:
-            ordering = ("-loan_approved_date",) 
+            ordering = ("-loan_approved_date",)
             verbose_name = "Prestamo"
             verbose_name_plural = "Prestamos"
 
