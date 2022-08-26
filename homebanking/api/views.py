@@ -1,7 +1,12 @@
 from urllib import response
+
+from msilib.schema import Class
+from re import search
+from tkinter import Variable
+
 from Clientes.models import clientes
 from Cuentas.views import Cuentas
-from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal
+from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal,BalanceCuentaSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -13,6 +18,7 @@ from Cuentas.models import cuenta as Cuenta
 from .serializers import PrestamoSerializer, MontoPrestamosDeClienteSerializer
 from tarjetas.models import Tarjetas
 from tarjetas.serializer import TarjetaSerializer
+from Clientes.models import clientes
 
 
 
@@ -158,5 +164,18 @@ class MontoPrestamosDeCliente(APIView):
         prestamo = Prestamo.objects.filter(id_cliente=customer_id)
         serializer = MontoPrestamosDeClienteSerializer(prestamo, many= True)
         if prestamo:
+            return Response(serializer.data, status= status.HTTP_200_OK)
+        return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
+
+
+# BALANCE DE CUENTA DE CLIENTE
+class BalanceDeCuentaDeCliente(APIView):
+    def get(self, request):
+        # usuario = User.objects.filter(pk = request.user.id).first()
+        cuenta = Cuenta.objects.filter (user_email=request.user.email)
+        print(request.user.email)
+        # print(request.user.email)
+        serializer = BalanceCuentaSerializer(cuenta, many = True)
+        if cuenta:
             return Response(serializer.data, status= status.HTTP_200_OK)
         return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
