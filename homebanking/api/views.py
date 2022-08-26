@@ -1,6 +1,3 @@
-from msilib.schema import Class
-from re import search
-from tkinter import Variable
 from Clientes.models import clientes
 from Cuentas.views import Cuentas
 from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal,BalanceCuentaSerializer
@@ -31,20 +28,31 @@ class ClienteLists(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def get(self, request): # nuevo
+        
         permission_classes = [permissions.IsAuthenticated]
-        cliente = clientes.objects.all().order_by('created_at')
-        serializer = ClienteSerializer(cliente, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        if request.user.is_staff:
+            cliente = clientes.objects.all().order_by('created_at')
+            print(request.user.user_permissions.all())
+            serializer = ClienteSerializer(cliente, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
 class ClienteDetails(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request, pk):
-        cliente =clientes.objects.filter(pk=pk).first()
-        serializer = ClienteSerializer(cliente)
-        if cliente:
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+        if request.user.is_staff:
+            cliente =clientes.objects.filter(pk=pk).first()
+            
+            serializer = ClienteSerializer(cliente)
+            if cliente:
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else: 
+                return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+                
 
 
     def put(self, request, pk):
@@ -157,10 +165,10 @@ class MontoPrestamosDeCliente(APIView):
 # BALANCE DE CUENTA DE CLIENTE
 class BalanceDeCuentaDeCliente(APIView):
     def get(self, request):
-        clienteId = request.user.customer_id
-        #cliente = clientes.objects.filter (pk=request.user.customer_id).first()
-        cuenta = Cuenta.objects.filter (customer_id=request.user.customer_id)
-
+        # usuario = User.objects.filter(pk = request.user.id).first()
+        cuenta = Cuenta.objects.filter (user_email=request.user.email)
+        print(request.user.email)
+        # print(request.user.email)
         serializer = BalanceCuentaSerializer(cuenta, many = True)
         if cuenta:
             return Response(serializer.data, status= status.HTTP_200_OK)
