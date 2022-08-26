@@ -1,6 +1,6 @@
 from Clientes.models import clientes
 from Cuentas.views import Cuentas
-from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal,BalanceCuentaSerializer
+from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal,BalanceCuentaSerializer,MontoPrestamosSucursalSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -171,5 +171,15 @@ class BalanceDeCuentaDeCliente(APIView):
         # print(request.user.email)
         serializer = BalanceCuentaSerializer(cuenta, many = True)
         if cuenta:
+            return Response(serializer.data, status= status.HTTP_200_OK)
+        return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
+
+# OBTENER PRESTAMO DE UNA SUCURSAL
+class MontoPrestamoSucursal(APIView):
+    def get(self, request, sucursal_id):
+        prestamo = Prestamo.objects.filter(id_sucursal=sucursal_id)
+        
+        serializer = MontoPrestamosSucursalSerializer(prestamo, many = True)
+        if prestamo:
             return Response(serializer.data, status= status.HTTP_200_OK)
         return Response(serializer.error_messages, status = status.HTTP_404_NOT_FOUND)
