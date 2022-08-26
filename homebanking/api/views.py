@@ -1,9 +1,3 @@
-from urllib import response
-
-from msilib.schema import Class
-from re import search
-from tkinter import Variable
-
 from Clientes.models import clientes
 from Cuentas.views import Cuentas
 from api.serializers import ClienteSerializer,UserSerializer,SucursalSerializer,Sucursal,BalanceCuentaSerializer
