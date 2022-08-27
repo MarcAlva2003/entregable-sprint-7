@@ -57,3 +57,6 @@ class PrestamoSerializer(serializers.ModelSerializer):
 
 class MontoPrestamosDeClienteSerializer(serializers.Serializer):
     loan_total = serializers.FloatField()
+
+class MontoPrestamosSucursalSerializer(serializers.Serializer):
+    loan_total = serializers.FloatField()

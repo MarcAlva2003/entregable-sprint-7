@@ -12,11 +12,12 @@ class prestamos(models.Model):
         loan_total=models.FloatField(default=0)
         loanType=models.TextField(max_length=40, default='Personales')
         id_cliente=models.IntegerField(default=NULL)
+        id_sucursal=models.IntegerField(default=1)
 
         class Meta:
             ordering = ("-loan_approved_date",)
             verbose_name = "Prestamo"
             verbose_name_plural = "Prestamos"
 
-        def __str__(self):
-            return self.loan_total,self.loan_approved_date
+        # def __str__(self):
+        #     return self.loan_total,self.loan_approved_date
