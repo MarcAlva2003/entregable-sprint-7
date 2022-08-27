@@ -5,3 +5,5 @@ class ClienteAdmin (admin.ModelAdmin):
     readonly_fields = ('created-at','updated-at')
     admin.site.register(clientes)
 
+    def __str__(self):
+        return self.nombre
