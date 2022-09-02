@@ -1,3 +1,5 @@
+from dataclasses import field
+from pyexpat import model
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from Clientes.models import clientes
@@ -6,20 +8,30 @@ from prestamos.models import prestamos as Prestamos
 from Cuentas.models import cuenta
 
 class BalanceCuentaSerializer(serializers.Serializer):
+    tipo_de_cuenta=serializers.CharField(max_length=20)
+    iban=serializers.CharField(max_length=24)
     balance=serializers.IntegerField()
 
+class AllDataBalanceCuentaSerializer(serializers.Serializer):
+    iban=serializers.CharField(max_length=24)
+    tipo_de_cuenta=serializers.CharField(max_length=20)
+    balance=serializers.IntegerField(default=0)
+    customer_id=serializers.IntegerField()
+    user_email=serializers.EmailField(max_length=254)
 
 class ClienteSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = clientes
-        #indicamos que use todos los campos
         fields = "__all__"
-        #les decimos cuales son los de solo lectura
         read_only_fields = (
-            "id",
+            "name",
+            "surname",
+            "dni",
+            "tipo_cliente",
             "created_at",
             "updated_at",
+            "account_id",
             "owner",
         )
 
@@ -34,9 +46,7 @@ class UserSerializer(serializers.ModelSerializer):
 class SucursalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sucursal
-        #indicamos que use todos los campos
         fields = "__all__"
-        #les decimos cuales son los de solo lectura
         read_only_fields = (
         "id",
         "created_at",

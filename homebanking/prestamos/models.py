@@ -7,11 +7,11 @@ from asyncio.windows_events import NULL
 
 class prestamos(models.Model):
 
-        loan_approved_date=models.DateField(timezone.now())
+        loan_approved_date=models.DateField(auto_now=True)
         loan_month=models.IntegerField(default=1)
         loan_total=models.FloatField(default=0)
         loanType=models.TextField(max_length=40, default='Personales')
-        id_cliente=models.IntegerField(default=NULL)
+        id_cliente=models.IntegerField(default=1)
         id_sucursal=models.IntegerField(default=1)
 
         class Meta:

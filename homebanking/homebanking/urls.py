@@ -25,7 +25,8 @@ from login import views as login_views
 from prestamos import views as prestamos_views
 from tarjetas import views as tarjetas_views
 #imports de las apis
-from api.views import ClienteLists,ClienteDetails, PrestamoList,UserDetail,UserList,SucursalLists,SucursalDetails,PrestamoDetails,TarjetasDeCliente, MontoPrestamosDeCliente, BalanceDeCuentaDeCliente, MontoPrestamoSucursal
+from api.views import Clients, ClientBalance, MontoPrestamosDeCliente, MontoPrestamoSucursal, TarjetasCliente, SolicitudPrestamo, RechazarPrestamo, DireccionClienteID, EditarDireccionCliente, ListaSucursales
+# from api.views import ClienteLists,ClienteDetails, PrestamoList,UserDetail,UserList,SucursalLists,SucursalDetails,PrestamoDetails,TarjetasDeCliente, MontoPrestamosDeCliente, BalanceDeCuentaDeCliente, MontoPrestamoSucursal, GetClientList
 
 
 
@@ -46,21 +47,18 @@ urlpatterns = [
     path('perfil/',ITBANK_views.perfil, name = 'perfil'),
     path('sucycajero/',ITBANK_views.sucycajero, name = 'sucycajero'),
     path('terminos/',ITBANK_views.terminos, name = 'terminos'),
-    path('api/tarjetas-cliente/<int:customer_id>', TarjetasDeCliente.as_view()),
-    #esto agregue
     path('accounts/',include('django.contrib.auth.urls')),
-    #endpoints de la api
-    path('api/clientes/',ClienteLists.as_view()),
-    path('api/clientes/<int:pk>',ClienteDetails.as_view()),
-    path('api/users/', UserList.as_view()),
-    path('api/users/<int:pk>/', UserDetail.as_view()),
-    path('api/sucursales/',SucursalLists.as_view()),
-    path('api/sucursales/<int:pk>/',SucursalDetails.as_view()),
-    path('api/prestamopost/', PrestamoList.as_view()),
-    path('api/prestamodelete/<int:pk>',PrestamoDetails.as_view()),
-    path('api/montos-prestamo-cliente/<int:customer_id>',MontoPrestamosDeCliente.as_view()),
-    path('api/balance-cliente/', BalanceDeCuentaDeCliente.as_view()),
-    path('api/monto-prestamo-sucursal/<int:sucursal_id>', MontoPrestamoSucursal.as_view()),
+
+    path('api/cliente', Clients.as_view()),
+    path('api/cuentas-cliente', ClientBalance.as_view()),
+    path('api/prestamos-cliente', MontoPrestamosDeCliente.as_view()),
+    path('api/prestamos-sucursal/<int:sucursal_id>', MontoPrestamoSucursal.as_view()),
+    path('api/tarjetas-cliente/<int:customer_id>', TarjetasCliente.as_view()),
+    path('api/solicitud-prestamo', SolicitudPrestamo.as_view()),
+    path('api/rechazar-prestamo/<int:pk>', RechazarPrestamo.as_view()),
+    path('api/direccion-cliente/<int:pk>', DireccionClienteID.as_view()),
+    path('api/direccion-cliente', EditarDireccionCliente.as_view()),
+    path('api/sucursales',ListaSucursales.as_view()),
 ]
 
 #agregue
